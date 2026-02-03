@@ -1,0 +1,19 @@
+{
+  "name": "shadow-english",
+  "version": "1.0.0",
+  "description": "YouTube subtitle-based English shadowing + contextual vocabulary + SRS review",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "build-cefr": "node scripts/build-cefr.js"
+  },
+  "dependencies": {
+    "compromise": "^14.14.3",
+    "express": "^4.21.2",
+    "node-webvtt": "^1.9.4"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

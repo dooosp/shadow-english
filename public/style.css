@@ -1,0 +1,95 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #e0e0e0; min-height: 100vh; }
+
+/* Modal */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 100; }
+.modal { background: #1a1a2e; padding: 2rem; border-radius: 12px; text-align: center; width: 320px; }
+.modal h2 { margin-bottom: 0.5rem; color: #00d2ff; }
+.modal p { margin-bottom: 1rem; color: #888; }
+.modal input { width: 100%; padding: 10px; border: 1px solid #333; border-radius: 8px; background: #0f0f0f; color: #e0e0e0; font-size: 1rem; margin-bottom: 0.8rem; }
+.modal button { width: 100%; padding: 10px; background: #00d2ff; color: #0f0f0f; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; }
+.error { color: #ff4444; font-size: 0.85rem; }
+.hidden { display: none !important; }
+
+/* Header */
+header { display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.5rem; border-bottom: 1px solid #222; }
+header h1 { font-size: 1.2rem; color: #00d2ff; }
+nav { display: flex; gap: 0.5rem; }
+.tab { background: none; border: 1px solid #333; color: #888; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; position: relative; }
+.tab.active { border-color: #00d2ff; color: #00d2ff; }
+.badge { position: absolute; top: -6px; right: -6px; background: #ff4444; color: #fff; font-size: 0.7rem; border-radius: 50%; width: 18px; height: 18px; line-height: 18px; text-align: center; }
+
+/* Tab content */
+.tab-content { padding: 1rem 1.5rem; max-width: 900px; margin: 0 auto; }
+
+/* URL bar */
+.url-bar { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.url-bar input { flex: 1; padding: 10px; background: #1a1a2e; border: 1px solid #333; border-radius: 8px; color: #e0e0e0; font-size: 0.95rem; }
+.url-bar button, .controls button, .filter-bar select, #analyzeBtn { padding: 8px 16px; background: #00d2ff; color: #0f0f0f; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.status { padding: 8px 12px; border-radius: 8px; margin-bottom: 1rem; background: #1a1a2e; font-size: 0.85rem; }
+.status.error { background: #2e1a1a; color: #ff4444; }
+
+/* Player */
+#playerWrap { width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 8px; overflow: hidden; margin-bottom: 1rem; }
+#playerWrap iframe { width: 100%; height: 100%; }
+.controls { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; flex-wrap: wrap; }
+.controls label { color: #888; font-size: 0.85rem; }
+.controls select { background: #1a1a2e; border: 1px solid #333; color: #e0e0e0; padding: 4px 8px; border-radius: 6px; }
+#repeatBtn.active { background: #ff8800; }
+
+/* Subtitle list */
+.subtitle-list { max-height: 300px; overflow-y: auto; border: 1px solid #222; border-radius: 8px; }
+.sub-item { padding: 8px 12px; cursor: pointer; border-bottom: 1px solid #1a1a2e; font-size: 0.9rem; display: flex; gap: 0.5rem; }
+.sub-item:hover { background: #1a1a2e; }
+.sub-item.active { background: #00d2ff22; border-left: 3px solid #00d2ff; }
+.sub-time { color: #00d2ff; font-size: 0.8rem; min-width: 50px; }
+.sub-text { flex: 1; }
+
+/* Vocab result */
+#vocabResult { margin-top: 1rem; }
+#vocabResult h3 { margin-bottom: 0.5rem; }
+.vocab-item { display: flex; align-items: center; gap: 0.8rem; padding: 6px 0; border-bottom: 1px solid #1a1a2e; font-size: 0.9rem; }
+.vocab-word { font-weight: 600; min-width: 120px; }
+.vocab-cefr { font-size: 0.75rem; padding: 2px 6px; border-radius: 4px; background: #333; }
+.vocab-cefr.A1, .vocab-cefr.A2 { background: #1b5e20; }
+.vocab-cefr.B1, .vocab-cefr.B2 { background: #e65100; }
+.vocab-cefr.C1, .vocab-cefr.C2 { background: #b71c1c; }
+.vocab-pos { color: #888; font-size: 0.8rem; min-width: 40px; }
+.vocab-count { color: #666; font-size: 0.8rem; }
+.vocab-add { background: none; border: 1px solid #00d2ff; color: #00d2ff; padding: 2px 8px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+.vocab-add.added { border-color: #666; color: #666; cursor: default; }
+
+/* Wordbook */
+.filter-bar { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+.filter-bar label { color: #888; font-size: 0.85rem; }
+.filter-bar select { background: #1a1a2e; border: 1px solid #333; color: #e0e0e0; padding: 6px 10px; border-radius: 6px; }
+#wordCount { color: #666; font-size: 0.85rem; }
+.wb-item { background: #1a1a2e; border-radius: 8px; padding: 12px; margin-bottom: 8px; }
+.wb-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 4px; }
+.wb-word { font-weight: 600; font-size: 1.1rem; }
+.wb-phonetic { color: #888; font-size: 0.85rem; }
+.wb-audio { background: none; border: none; color: #00d2ff; cursor: pointer; font-size: 1rem; }
+.wb-delete { background: none; border: none; color: #ff4444; cursor: pointer; margin-left: auto; font-size: 0.85rem; }
+.wb-context { color: #aaa; font-size: 0.85rem; margin-top: 4px; font-style: italic; }
+.wb-meaning { color: #ccc; font-size: 0.85rem; margin-top: 2px; }
+
+/* Review / Flashcard */
+.review-stats { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; font-size: 0.9rem; }
+.review-stats span { color: #888; }
+.review-stats strong { color: #00d2ff; }
+.flashcard { background: #1a1a2e; border-radius: 12px; padding: 2rem; text-align: center; min-height: 200px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.card-face { font-size: 1.5rem; margin-bottom: 1rem; }
+#cardBack { font-size: 1rem; color: #aaa; }
+.btn-show { padding: 10px 24px; background: #00d2ff; color: #0f0f0f; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.answer-btns { display: flex; gap: 0.8rem; margin-top: 1rem; }
+.answer-btns button { padding: 8px 16px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; }
+.btn-again { background: #ff4444; color: #fff; }
+.btn-hard { background: #ff8800; color: #fff; }
+.btn-good { background: #4caf50; color: #fff; }
+.btn-easy { background: #00d2ff; color: #0f0f0f; }
+#reviewDone { text-align: center; padding: 3rem; color: #4caf50; font-size: 1.2rem; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }

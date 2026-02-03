@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow English</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- PIN 모달 -->
+  <div id="pinModal" class="modal-overlay">
+    <div class="modal">
+      <h2>Shadow English</h2>
+      <p>비밀번호를 입력하세요</p>
+      <input type="password" id="pinInput" placeholder="PIN" autofocus>
+      <button id="pinSubmit">입장</button>
+      <p id="pinError" class="error hidden"></p>
+    </div>
+  </div>
+
+  <!-- 메인 앱 -->
+  <div id="app" class="hidden">
+    <header>
+      <h1>Shadow English</h1>
+      <nav>
+        <button class="tab active" data-tab="shadowing">섀도잉</button>
+        <button class="tab" data-tab="wordbook">단어장</button>
+        <button class="tab" data-tab="review">복습 <span id="dueCount" class="badge hidden">0</span></button>
+      </nav>
+    </header>
+
+    <!-- 섀도잉 탭 -->
+    <section id="tab-shadowing" class="tab-content active">
+      <div class="url-bar">
+        <input type="text" id="videoUrl" placeholder="YouTube URL 입력">
+        <button id="loadBtn">로드</button>
+      </div>
+      <div id="loadStatus" class="status hidden"></div>
+      <div id="playerArea" class="hidden">
+        <div id="playerWrap">
+          <div id="player"></div>
+        </div>
+        <div class="controls">
+          <button id="repeatBtn" title="구간 반복">🔁 반복</button>
+          <label>속도 <select id="speedSelect">
+            <option value="0.5">0.5x</option>
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.25">1.25x</option>
+          </select></label>
+          <button id="analyzeBtn">단어 분석</button>
+        </div>
+        <div id="subtitleList" class="subtitle-list"></div>
+        <div id="vocabResult" class="hidden">
+          <h3>어휘 분석</h3>
+          <div id="vocabList"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 단어장 탭 -->
+    <section id="tab-wordbook" class="tab-content hidden">
+      <div class="filter-bar">
+        <label>CEFR 필터:
+          <select id="cefrFilter">
+            <option value="all">전체</option>
+            <option value="A1">A1</option><option value="A2">A2</option>
+            <option value="B1">B1</option><option value="B2">B2</option>
+            <option value="C1">C1</option><option value="C2">C2</option>
+            <option value="unknown">미분류</option>
+          </select>
+        </label>
+        <span id="wordCount">0 단어</span>
+      </div>
+      <div id="wordbookList"></div>
+    </section>
+
+    <!-- 복습 탭 -->
+    <section id="tab-review" class="tab-content hidden">
+      <div id="reviewStats" class="review-stats"></div>
+      <div id="flashcard" class="flashcard hidden">
+        <div id="cardFront" class="card-face"></div>
+        <div id="cardBack" class="card-face hidden"></div>
+        <button id="showAnswer" class="btn-show">정답 보기</button>
+        <div id="answerBtns" class="answer-btns hidden">
+          <button data-q="1" class="btn-again">모름</button>
+          <button data-q="3" class="btn-hard">어려움</button>
+          <button data-q="4" class="btn-good">보통</button>
+          <button data-q="5" class="btn-easy">쉬움</button>
+        </div>
+      </div>
+      <div id="reviewDone" class="hidden">
+        <p>오늘 복습 완료!</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+  <script src="shadowing.js"></script>
+  <script src="wordbook.js"></script>
+  <script src="review.js"></script>
+</body>
+</html>
