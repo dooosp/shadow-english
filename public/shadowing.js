@@ -105,7 +105,7 @@ function syncSubtitle() {
   // 구간 반복 체크
   if (repeatMode && repeatSegIdx >= 0) {
     const seg = segments[repeatSegIdx];
-    if (t >= seg.end) {
+    if (t >= seg.end || t < seg.start - 0.5) {
       ytPlayer.seekTo(seg.start, true);
       return;
     }
@@ -125,11 +125,32 @@ document.getElementById('repeatBtn').addEventListener('click', () => {
   repeatMode = !repeatMode;
   document.getElementById('repeatBtn').classList.toggle('active', repeatMode);
   if (repeatMode) {
-    repeatSegIdx = activeSegIdx >= 0 ? activeSegIdx : 0;
+    const idx = findCurrentSegment();
+    if (idx < 0) {
+      repeatMode = false;
+      document.getElementById('repeatBtn').classList.remove('active');
+      return;
+    }
+    repeatSegIdx = idx;
+    seekToSegment(idx);
   } else {
     repeatSegIdx = -1;
   }
 });
+
+function findCurrentSegment() {
+  if (!ytPlayer || !ytPlayer.getCurrentTime) return activeSegIdx >= 0 ? activeSegIdx : 0;
+  const t = ytPlayer.getCurrentTime();
+  // 현재 시간이 포함된 구간
+  for (let i = 0; i < segments.length; i++) {
+    if (t >= segments[i].start && t < segments[i].end) return i;
+  }
+  // 가장 가까운 다음 구간
+  for (let i = 0; i < segments.length; i++) {
+    if (segments[i].start > t) return i;
+  }
+  return segments.length - 1;
+}
 
 document.getElementById('speedSelect').addEventListener('change', e => {
   if (ytPlayer && ytPlayer.setPlaybackRate) {

@@ -1,4 +1,4 @@
-require('dotenv').config();
+try { require('dotenv').config(); } catch { /* dotenv optional */ }
 
 module.exports = {
   PORT: process.env.PORT || 3004,
