@@ -1,6 +1,7 @@
 let wordbookData = [];
 const dictCache = {};
 
+// eslint-disable-next-line no-unused-vars -- called from app.js tab switch
 async function loadWordbook() {
   try {
     wordbookData = await api('GET', '/api/wordbook');

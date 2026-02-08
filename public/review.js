@@ -1,6 +1,7 @@
 let dueCards = [];
 let currentCardIdx = 0;
 
+// eslint-disable-next-line no-unused-vars -- called from app.js tab switch
 async function loadReview() {
   try {
     const [stats, cards] = await Promise.all([
